@@ -9,6 +9,7 @@ using ImageCircle.Forms.Plugin.Droid;
 using Android.Runtime;
 using Shiny;
 using MediaManager;
+using Hanselman.Styles;
 
 // haavamoa cheered 1000 August 2, 2019
 // blounty cheered 100 August 16, 2019
@@ -18,7 +19,7 @@ namespace HanselmanAndroid
 {
     [Activity(Label = "@string/app_name",
         Theme="@style/MyTheme",
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : FormsAppCompatActivity
     {
 
@@ -30,12 +31,19 @@ namespace HanselmanAndroid
 
             Forms.SetFlags("CarouselView_Experimental", "IndicatorView_Experimental");
             Forms.Init(this, bundle);
+            Xamarin.Forms.DualScreen.DualScreenService.Init(this);
             FormsMaterial.Init(this, bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
             CrossMediaManager.Current.Init(this);
             ImageCircleRenderer.Init();
             Android.Glide.Forms.Init(this);
             LoadApplication(new App());
+        }
+
+        public override void OnConfigurationChanged(Android.Content.Res.Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+            ThemeHelper.ChangeTheme(Hanselman.Helpers.Settings.ThemeOption, true);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

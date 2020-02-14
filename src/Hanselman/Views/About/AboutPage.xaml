@@ -10,6 +10,8 @@
     xmlns:modelsShared="clr-namespace:Hanselman.Models;assembly=Hanselman.Shared"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:viewmodels="clr-namespace:Hanselman.ViewModels"
+    xmlns:dualscreen="clr-namespace:Xamarin.Forms.DualScreen;assembly=Xamarin.Forms.DualScreen"
+    xmlns:about="clr-namespace:Hanselman.Views.About"
     Title="Scott Hanselman"
     ios:Page.ModalPresentationStyle="FormSheet"
     ios:Page.UseSafeArea="True"
@@ -58,111 +60,28 @@
             </ImageButton.Source>
         </ImageButton>
 
+        <dualscreen:TwoPaneView Grid.Row="1"
+                                Pane1Length="*"
+                                Pane2Length="*"
+                                WideModeConfiguration="LeftRight"
+                                TallModeConfiguration="BottomTop">
+            
+            <dualscreen:TwoPaneView.Pane1>
+                <about:FeaturedItemsView/>
+            </dualscreen:TwoPaneView.Pane1>
+            <dualscreen:TwoPaneView.Pane2>
+                <about:AboutView/>
+            </dualscreen:TwoPaneView.Pane2>
+        </dualscreen:TwoPaneView>
 
 
-        <ScrollView Grid.Row="1" Grid.ColumnSpan="2">
+        <!--<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
 
             <StackLayout Orientation="Vertical" Spacing="0">
-                <Label
-                    Margin="10,0"
-                    IsVisible="{Binding HasData}"
-                    Style="{DynamicResource LargeLabelStyle}"
-                    Text="Featured"
-                    VerticalOptions="Center" />
-                <CarouselView
-                    x:Name="CarouselFeaturedItems"
-                    HeightRequest="150"
-                    IsVisible="{Binding HasData}"
-                    ItemsSource="{Binding FeaturedItems}"
-                    PeekAreaInsets="75">
-                    <CarouselView.EmptyView>
-                        <ActivityIndicator
-                            HorizontalOptions="CenterAndExpand"
-                            IsRunning="{Binding IsBusy}"
-                            IsVisible="{Binding IsBusy}"
-                            VerticalOptions="Center" />
-                    </CarouselView.EmptyView>
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate x:DataType="modelsShared:FeaturedItem">
-                            <StackLayout>
-                                <Frame
-                                    Margin="10"
-                                    Padding="0,0,0,0"
-                                    CornerRadius="8"
-                                    InputTransparent="True"
-                                    Style="{DynamicResource FrameStyle}">
 
-                                    <Grid RowSpacing="0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="125" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid>
-                                            <Image Aspect="AspectFill" Source="{Binding Image}" />
-                                            <pancake:PancakeView
-                                                BackgroundGradientEndColor="{DynamicResource SystemBlue}"
-                                                BackgroundGradientStartColor="#10000000"
-                                                HorizontalOptions="FillAndExpand"
-                                                VerticalOptions="FillAndExpand" />
-                                            <Label
-                                                Margin="16,8"
-                                                FontAttributes="Bold"
-                                                FontSize="Small"
-                                                Text="{Binding Title}"
-                                                TextColor="White"
-                                                VerticalOptions="End" />
-                                        </Grid>
-                                    </Grid>
-                                </Frame>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-                <IndicatorView
-                    IndicatorsShape="Circle"
-                    HorizontalOptions="Center"
-                    IndicatorColor="{DynamicResource SystemGray}"
-                    IndicatorSize="8"
-                    IndicatorView.ItemsSourceBy="CarouselFeaturedItems"
-                    IsVisible="{Binding HasData}"
-                    SelectedIndicatorColor="{DynamicResource PrimaryColor}" />
-                <Label
-                    Margin="10,10,10,0"
-                    Style="{DynamicResource LargeLabelStyle}"
-                    Text="About Scott"
-                    VerticalOptions="Center" />
-                <Frame
-                    Margin="10,10"
-                    Padding="0"
-                    Style="{DynamicResource FrameStyle}">
-                    <StackLayout>
-                        <Image
-                            Aspect="AspectFill"
-                            HeightRequest="200"
-                            Source="scott.png" />
-                        <Label
-                            Margin="8"
-                            LineBreakMode="WordWrap"
-                            Style="{DynamicResource SmallLabelStyle}"
-                            Text="My name is Scott Hanselman. I'm a programmer, teacher, and speaker. I work out of my home office in Portland, Oregon for the Web Platform Team at Microsoft, but this blog, its content and opinions are my own. I blog about technology, culture, gadgets, diversity, code, the web, where we're going and where we've been. I'm excited about community, social equity, media, entrepreneurship and above all, the open web." />
-                        <StackLayout
-                            BindableLayout.ItemsSource="{Binding SocialItems}"
-                            HorizontalOptions="CenterAndExpand"
-                            Orientation="Horizontal"
-                            Spacing="5">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate x:DataType="models:SocialItem">
-                                    <Button
-                                        Command="{Binding OpenUrlCommand}"
-                                        Style="{DynamicResource MaterialButton}"
-                                        Text="{Binding Icon}" />
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
+                <about:FeaturedItemsView/>
+                <about:AboutView/>
             </StackLayout>
-        </ScrollView>
+        </ScrollView>-->
     </Grid>
 </ContentPage>
